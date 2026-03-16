@@ -12,10 +12,6 @@ It extracts text from your PDF resume, compares it with the pasted job descripti
 
 Built with Streamlit + LangChain + Hugging Face Inference (Llama 3.1 8B Instruct)
 
-## Screenshots
-
-*(Add 1–3 screenshots here later – e.g. upload + analysis result)*
-
 <!-- You can later replace this with real images like: -->
 <!-- ![Upload screen](screenshots/upload.png) -->
 <!-- ![Result example](screenshots/result.png) -->
