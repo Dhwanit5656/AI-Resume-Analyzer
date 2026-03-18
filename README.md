@@ -1,68 +1,142 @@
-# AI Resume Analyzer 📄✨
+# 📄 AI Resume Analyzer
 
-An AI-powered tool that helps you understand how well your resume matches a specific job description.
+An intelligent resume analysis tool that compares your resume against a job description, gives an ATS match score, and provides actionable improvement suggestions — powered by LangChain, HuggingFace, and Streamlit.
 
-It extracts text from your PDF resume, compares it with the pasted job description, and uses a language model to generate:
+---
 
-- match percentage estimation
-- strong matching areas
-- missing keywords/skills
-- ATS-friendliness feedback
-- improvement suggestions
+## ✨ Features
 
-Built with Streamlit + LangChain + Hugging Face Inference (Llama 3.1 8B Instruct)
+- 📤 **PDF Resume Upload** — Easily upload your resume directly in the sidebar
+- 🤖 **AI-Powered Analysis** — Uses Llama 3.1 8B to deeply evaluate your resume vs. job description
+- 📊 **ATS Match Score** — Get a 0–100% compatibility score instantly
+- 🔍 **Skill Gap Analysis** — See exactly which skills you're missing for the role
+- 💡 **Improvement Suggestions** — Actionable tips to strengthen your resume
+- 🏷️ **ATS Optimization Tips** — Keyword and formatting advice to pass applicant tracking systems
+- 🖥️ **Clean Wide-Layout UI** — Intuitive Streamlit interface with sidebar upload
 
-<!-- You can later replace this with real images like: -->
-<!-- ![Upload screen](screenshots/upload.png) -->
-<!-- ![Result example](screenshots/result.png) -->
+---
 
-## Features
+## 📋 Analysis Breakdown
 
-- Upload resume (PDF only)
-- Paste job description
-- AI-powered semantic matching & keyword analysis
-- Clean, readable markdown output
-- Uses Meta's Llama-3.1-8B-Instruct via Hugging Face
+For every resume + job description pair, the tool returns:
 
-## Tech Stack
+| Section | Description |
+|---|---|
+| **Overall Match Score** | Percentage match between resume and job |
+| **Key Skills Matched** | Skills from your resume that align with the role |
+| **Missing Skills** | Required skills not found in your resume |
+| **Strengths** | Strong projects, tech, or experience highlights |
+| **Weaknesses / Gaps** | Areas that need improvement |
+| **Improvement Suggestions** | Clear, specific resume edits to increase fit |
+| **ATS Optimization Tips** | Keywords and formatting fixes for ATS compatibility |
 
-- **Frontend**: Streamlit
-- **LLM**: meta-llama/Llama-3.1-8B-Instruct (Hugging Face Inference)
-- **PDF parsing**: PyPDFLoader (LangChain)
-- **Orchestration**: LangChain (PromptTemplate + ChatHuggingFace)
-- **Environment**: python-dotenv
+---
 
-## Quick Start (Local)
+## 🛠️ Tech Stack
 
-### 1. Clone & install
+| Component | Technology |
+|---|---|
+| Frontend | [Streamlit](https://streamlit.io/) |
+| LLM | `meta-llama/Llama-3.1-8B-Instruct` via HuggingFace |
+| RAG Framework | LangChain |
+| PDF Loader | `PyPDFLoader` (LangChain Community) |
+| Prompt Engine | `PromptTemplate` (LangChain Core) |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/ai-resume-analyzer.git
+git clone https://github.com/your-username/ai-resume-analyzer.git
 cd ai-resume-analyzer
+```
 
-# Recommended: virtual environment
-python -m venv venv
-source venv/bin/activate     # Linux/macOS
-# or
-venv\Scripts\activate        # Windows
+### 2. Install dependencies
 
+```bash
 pip install -r requirements.txt
 ```
-###2. Get your Hugging Face Access Token & create .env file:
 
-- 1.Go to: https://huggingface.co/settings/tokens
-- 2.Click New token → give it a name (e.g. "resume-analyzer") → select Read role → Create
-- 3.Copy the token (starts with hf_)
-- 4.Important: You also need to be approved for the model:
-  - Visit https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct
-  - Accept the license / request access (usually instant or within hours)
-- 5.In the project root folder, create a file named exactly .env and paste:
-  HUGGINGFACEHUB_API_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+### 3. Set up environment variables
 
-###3. Run the app:
+Create a `.env` file in the root directory:
 
-- streamlit run app.py
-- Open http://localhost:8501 in your browser
-- Upload a PDF resume, paste a job description, and click "Analyze Resume"
+```env
+HUGGINGFACEHUB_API_TOKEN=your_huggingface_token_here
+```
 
-- You should see the analysis result in a few seconds (depending on Hugging Face server load).
+> Get your free API token at [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
+
+### 4. Run the app
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 📦 Requirements
+
+```
+streamlit
+langchain
+langchain-huggingface
+langchain-community
+python-dotenv
+pypdf
+```
+
+---
+
+## 🖼️ Usage
+
+1. **Upload your resume** (PDF) using the sidebar uploader
+2. **Paste the job description** into the text area on the main page
+3. Click **"🚀 Analyze Resume"**
+4. Review the detailed AI analysis output
+
+---
+
+## 📁 Project Structure
+
+```
+ai-resume-analyzer/
+│
+├── app.py              # Main Streamlit application
+├── prompt.py           # LLM prompt template
+├── .env                # API keys (not committed)
+├── .gitignore
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## ⚙️ Configuration
+
+You can adjust the following in `app.py`:
+
+| Parameter | Default | Description |
+|---|---|---|
+| `max_new_tokens` | `2048` | Maximum length of AI response |
+| `repo_id` | `meta-llama/Llama-3.1-8B-Instruct` | HuggingFace model to use |
+| `height` | `200` | Height of the job description text area |
+
+---
+
+## 📝 Notes
+
+- Only **PDF** resumes are supported at this time
+- The LLM is loaded fresh on each analysis — no session state is maintained
+- For best results, paste the **full job description** including requirements and responsibilities
+
+---
+
+## 🙌 Acknowledgements
+
+- [LangChain](https://github.com/langchain-ai/langchain) for the LLM pipeline
+- [HuggingFace](https://huggingface.co/) for model hosting
+- [Streamlit](https://streamlit.io/) for the UI framework
+- [Meta AI](https://ai.meta.com/) for the Llama 3.1 model
